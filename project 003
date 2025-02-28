@@ -1,4 +1,4 @@
-# ULN2003 Motor Driver Documentation
+# ULN2003 Motor Driver 
 
 ## Overview
 The **ULN2003** is a high-voltage, high-current Darlington transistor array commonly used for driving stepper motors, relays, and other inductive loads. It consists of **seven NPN Darlington pairs**, each capable of driving **500mA** and withstanding peak currents up to **600mA**.
