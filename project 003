@@ -29,7 +29,7 @@ The **ULN2003** is a high-voltage, high-current Darlington transistor array comm
          |  ULN2003
         GND
 ```
-https://arduino-forth.com/articles/images/composants/steppers/ULN2003motorStepDriver/ULN2003schematic.jpg
+- https://arduino-forth.com/articles/images/composants/steppers/ULN2003motorStepDriver/ULN2003schematic.jpg
 
 ## Application Circuit: Driving a 28BYJ-48 Stepper Motor
 ### Connection Table
