@@ -25,6 +25,7 @@
  VCC                     5V
  GND                     GND
 
+-https://lastminuteengineers.com/wp-content/uploads/arduino/Wiring-28BYJ48-Stepper-Motor-with-ULN2003-Driver-and-Arduino.png
 - The 28BYJ-48 stepper motor is connected to ULN2003 motor driver via an onboard white 5-pin connector.
 
 ## ARDUINO CODE
