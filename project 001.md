@@ -25,7 +25,8 @@
 - Output Filtering: Additional capacitors (0.1µF) are used to remove high-frequency noise.
 
 ## Circuit diagram
-https://theorycircuit.com/wp-content/uploads/2020/06/12v-and-5v-Dual-Power-Supply-1024x350.png
+![image](https://github.com/user-attachments/assets/fea141a9-a0e2-4e93-bab4-f6a2519f6f70)
+
 
 ## Working Principle
 
