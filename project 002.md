@@ -29,28 +29,31 @@
 
 - The 28BYJ-48 stepper motor is connected to ULN2003 motor driver via an onboard white 5-pin connector.
 
-## ARDUINO CODE
+## Arduino Code
 
-# include <Stepper.h>
-`
-# define STEPS 2048 // Steps per revolution for 28BYJ-48
+#include <Stepper.h>
 
-Stepper myStepper(STEPS, 8, 10, 9, 11);
+// Define the number of steps per revolution (change this according to your motor)
+#define STEPS_PER_REV 200
+
+// Initialize the stepper library with the steps per revolution and pin connections
+Stepper stepper(STEPS_PER_REV, 8, 9, 10, 11);
 
 void setup() {
-    myStepper.setSpeed(10); // Speed in RPM
-    Serial.begin(9600);
+  stepper.setSpeed(60); // Set speed to 60 RPM
+  Serial.begin(9600);  // Initialize serial communication
 }
 
 void loop() {
-    Serial.println("Rotating clockwise");
-    myStepper.step(STEPS); // Full rotation
-    delay(1000);
+  Serial.println("Moving forward");
+  stepper.step(STEPS_PER_REV); // Move one full revolution forward
+  delay(1000);
 
-    Serial.println("Rotating counterclockwise");
-    myStepper.step(-STEPS); // Full rotation in opposite direction
-    delay(1000);
+  Serial.println("Moving backward");
+  stepper.step(-STEPS_PER_REV); // Move one full revolution backward
+  delay(1000);
 }
+
 
 ## Breakdown
 
