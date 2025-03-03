@@ -54,6 +54,7 @@ The **ULN2003** is a high-voltage, high-current Darlington transistor array comm
 | COM     | +5V     |
 
 ### Arduino Code 
+
 ```cpp
 #include <Stepper.h>
 #define STEPS 2048
