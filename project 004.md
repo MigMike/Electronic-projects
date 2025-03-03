@@ -109,11 +109,9 @@ void loop() {
     }
 }
 
-
-
 ## Breakdown
-Direct Drive (Multiplexing):
 
+Direct Drive (Multiplexing):
 . Each digit is turned on one at a time in quick succession.
 . Persistence of vision makes all digits appear simultaneously.
 . Segments are controlled via binary encoding.
