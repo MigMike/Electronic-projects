@@ -43,50 +43,68 @@ A 4-digit 7-segment display typically consists of 7 LED segments (A to G) and a 
 
 ---
 ## Arduino Code 
-// Pin definitions
-const int segmentPins[] = {2, 3, 4, 5, 6, 7, 8, 9}; // A, B, C, D, E, F, G, DP
-const int digitPins[] = {10, 11, 12, 13}; // D1, D2, D3, D4
+// Define segment pins (A to G and DP)
+const int segmentPins[] = {2, 3, 4, 5, 6, 7, 8, 9};
 
-// Digit patterns for 0-9 (Common Anode: LOW to turn segment ON, HIGH for OFF)
-const byte numbers[10] = {
-  0b11000000, // 0
-  0b11111001, // 1
-  0b10100100, // 2
-  0b10110000, // 3
-  0b10011001, // 4
-  0b10010010, // 5
-  0b10000010, // 6
-  0b11111000, // 7
-  0b10000000, // 8
-  0b10010000  // 9
+// Define digit select pins
+const int digitPins[] = {10, 11, 12, 13};
+
+// Digit patterns for numbers 0-9 (Common Cathode)
+const byte digitPatterns[10] = {
+    0b00111111, // 0
+    0b00000110, // 1
+    0b01011011, // 2
+    0b01001111, // 3
+    0b01100110, // 4
+    0b01101101, // 5
+    0b01111101, // 6
+    0b00000111, // 7
+    0b01111111, // 8
+    0b01101111  // 9
 };
 
-// Number to display (example: 1234)
-int digits[4] = {1, 2, 3, 4};
-
-// Function to display a digit
-void displayDigit(int digit, int number) {
-  digitalWrite(digitPins[digit], LOW); // Activate digit (LOW for common anode, HIGH for common cathode)
-
-  // Set segments
-  for (int i = 0; i < 8; i++) {
-    digitalWrite(segmentPins[i], bitRead(numbers[number], i)); // Set segment state
-  }
-
-  delay(5); // Small delay for persistence
-  digitalWrite(digitPins[digit], HIGH); // Deactivate digit
+void setup() {
+    // Set segment pins as output
+    for (int i = 0; i < 8; i++) {
+        pinMode(segmentPins[i], OUTPUT);
+    }
+    // Set digit control pins as output
+    for (int i = 0; i < 4; i++) {
+        pinMode(digitPins[i], OUTPUT);
+    }
 }
 
-void setup() {
-  for (int i = 0; i < 8; i++) pinMode(segmentPins[i], OUTPUT);
-  for (int i = 0; i < 4; i++) pinMode(digitPins[i], OUTPUT);
+void displayNumber(int number) {
+    int digits[4] = {
+        number / 1000,          // Extract thousands
+        (number / 100) % 10,    // Extract hundreds
+        (number / 10) % 10,     // Extract tens
+        number % 10             // Extract ones
+    };
+
+    for (int i = 0; i < 4; i++) {
+        digitalWrite(digitPins[i], LOW);  // Activate digit
+        setSegments(digitPatterns[digits[i]]);
+        delay(5);  // Multiplexing delay
+        digitalWrite(digitPins[i], HIGH); // Deactivate digit
+    }
+}
+
+void setSegments(byte pattern) {
+    for (int i = 0; i < 8; i++) {
+        digitalWrite(segmentPins[i], (pattern >> i) & 0x01);
+    }
 }
 
 void loop() {
-  for (int i = 0; i < 4; i++) {
-    displayDigit(i, digits[i]);
-  }
+    for (int num = 0; num <= 9999; num++) {
+        unsigned long start = millis();
+        while (millis() - start < 1000) {
+            displayNumber(num);
+        }
+    }
 }
+
 
 ## Breakdown
 Direct Drive (Multiplexing):
