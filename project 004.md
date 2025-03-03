@@ -42,15 +42,24 @@ A 4-digit 7-segment display typically consists of 7 LED segments (A to G) and a 
 - ![image](https://github.com/user-attachments/assets/a28170df-3e96-43ee-8c10-2ed61f35c264)
 
 ---
-## Arduino Code 
-// Define segment pins (A to G and DP)
-const int segmentPins[] = {2, 3, 4, 5, 6, 7, 8, 9};
+## Arduino Code
 
-// Define digit select pins
-const int digitPins[] = {10, 11, 12, 13};
+```cpp
+#define A 2
+#define B 3
+#define C 4
+#define D 5
+#define E 6
+#define F 7
+#define G 8
+#define DP 9
 
-// Digit patterns for numbers 0-9 (Common Cathode)
-const byte digitPatterns[10] = {
+#define DIGIT1 10
+#define DIGIT2 11
+#define DIGIT3 12
+#define DIGIT4 13
+
+const byte numbers[10] = {
     0b00111111, // 0
     0b00000110, // 1
     0b01011011, // 2
@@ -63,47 +72,43 @@ const byte digitPatterns[10] = {
     0b01101111  // 9
 };
 
+const int segmentPins[8] = {A, B, C, D, E, F, G, DP};
+const int digitPins[4] = {DIGIT1, DIGIT2, DIGIT3, DIGIT4};
+
+int displayNumber = 1234;
+
 void setup() {
-    // Set segment pins as output
     for (int i = 0; i < 8; i++) {
         pinMode(segmentPins[i], OUTPUT);
     }
-    // Set digit control pins as output
     for (int i = 0; i < 4; i++) {
         pinMode(digitPins[i], OUTPUT);
     }
 }
 
-void displayNumber(int number) {
-    int digits[4] = {
-        number / 1000,          // Extract thousands
-        (number / 100) % 10,    // Extract hundreds
-        (number / 10) % 10,     // Extract tens
-        number % 10             // Extract ones
-    };
-
-    for (int i = 0; i < 4; i++) {
-        digitalWrite(digitPins[i], LOW);  // Activate digit
-        setSegments(digitPatterns[digits[i]]);
-        delay(5);  // Multiplexing delay
-        digitalWrite(digitPins[i], HIGH); // Deactivate digit
-    }
-}
-
-void setSegments(byte pattern) {
+void displayDigit(int digit, int pos) {
+    digitalWrite(DIGIT1, HIGH);
+    digitalWrite(DIGIT2, HIGH);
+    digitalWrite(DIGIT3, HIGH);
+    digitalWrite(DIGIT4, HIGH);
+    
     for (int i = 0; i < 8; i++) {
-        digitalWrite(segmentPins[i], (pattern >> i) & 0x01);
+        digitalWrite(segmentPins[i], (numbers[digit] >> i) & 1);
     }
+    
+    digitalWrite(digitPins[pos], LOW);
+    delay(5);
+    digitalWrite(digitPins[pos], HIGH);
 }
 
 void loop() {
-    for (int num = 0; num <= 9999; num++) {
-        unsigned long start = millis();
-        while (millis() - start < 1000) {
-            displayNumber(num);
-        }
+    int num = displayNumber;
+    for (int i = 3; i >= 0; i--) {
+        displayDigit(num % 10, i);
+        num /= 10;
     }
 }
+
 
 
 ## Breakdown
