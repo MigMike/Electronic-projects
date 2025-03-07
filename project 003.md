@@ -1,7 +1,7 @@
-# Controlling a Stepper Motor Using Arduino 
+# Controlling a Stepper Motor Using Arduino and ULN2003
 
 ## Introduction
-Stepper motors are widely used in precision control applications like CNC machines, 3D printers, and robotics. The ULN2003 stepper driver allows easy interfacing between the stepper motor and an Arduino.
+Stepper motors are widely used in precision control applications like CNC machines, 3D printers, and robotics. The ULN2003 stepper driver allows easy interfacing between the stepper motor and an Arduino.  
 
 ---
 
@@ -46,10 +46,11 @@ Arduino       ULN2003 Driver       Stepper Motor (28BYJ-48)
   D11  --->   IN4
 
 ULN2003 Output pins connect to the motor's coils.
-External 5V DC supply should used for motor power.
-`![image](https://github.com/user-attachments/assets/f9baa52c-35d8-4e64-95e9-dc95a94bbb88)
-``
+External 5V DC supply recommended for motor power.
+```
+
 ---
+
 ## Arduino Code
 
 ```cpp
@@ -77,7 +78,7 @@ void loop() {
 
 ---
 
-## Code Breakdown
+##  Code Breakdown
 
 1. **Include the Stepper Library:** The `<Stepper.h>` library is included to simplify stepper motor control.
 2. **Define Steps per Revolution:** The 28BYJ-48 motor has 2048 steps per revolution in full-step mode.
