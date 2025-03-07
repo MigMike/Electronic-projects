@@ -49,6 +49,7 @@ ULN2003 Output pins connect to the motor's coils.
 External 5V DC supply recommended for motor power.
 ```
 ![image](https://github.com/user-attachments/assets/55332f7d-eb70-42ea-a1ff-e331ecb4a8de)
+![image](https://github.com/user-attachments/assets/cd1f8fef-2f7d-417f-8494-cdda5bb33049)
 
 ---
 
