@@ -1,4 +1,4 @@
-# Controlling a Stepper Motor Using Arduino and ULN2003
+# Controlling a Stepper Motor Using Arduino 
 
 ## Introduction
 Stepper motors are widely used in precision control applications like CNC machines, 3D printers, and robotics. The ULN2003 stepper driver allows easy interfacing between the stepper motor and an Arduino.  
